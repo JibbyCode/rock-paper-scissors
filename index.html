@@ -1,0 +1,68 @@
+<script>
+
+function computerPlay(){
+    let options = ["Rock", "Paper", "Scissors"];
+    return options[Math.floor(Math.random() * options.length)];
+}
+
+let playerScore = 0;
+let compScore = 0;
+game();
+
+
+function game(){
+    
+    if(playerScore < 5 && compScore < 5){
+        let playerSelection = prompt("Choose Rock, Paper, or Scissor");
+        let computerSelection = computerPlay();
+        playRound(playerSelection, computerSelection);
+    }
+    else if (playerScore === 5){
+        console.log("Player Wins!");
+    }
+    else{
+        console.log("Computer Wins!");
+    }
+
+
+    function playRound (playerSelection, computerSelection){
+        if (playerSelection.toUpperCase() === "ROCK" && computerSelection.toUpperCase() === "PAPER"){
+            compScore++;
+            console.log("You Lose! Rock beats Paper");
+            game();
+        }
+        else if (playerSelection.toUpperCase() === "PAPER" && computerSelection.toUpperCase() === "SCISSORS"){
+            compScore++;
+            console.log("You Lose! Scissors beats Paper");
+            game();
+        }
+        else if (playerSelection.toUpperCase() === "SCISSORS" && computerSelection.toUpperCase() === "ROCK"){
+            compScore++;
+            console.log("You Lose! Rock beats Scissors");
+            game();
+        }
+        else if (playerSelection.toUpperCase() === "PAPER" && computerSelection.toUpperCase() === "ROCK"){
+            playerScore++;
+            console.log("You Win! Paper beats Rock");
+            game();
+        }
+        else if (playerSelection.toUpperCase() === "SCISSORS" && computerSelection.toUpperCase() === "PAPER"){
+            playerScore++;
+            console.log("You Win! Scissors beats Paper");
+            game();
+        }
+        else if (playerSelection.toUpperCase() === "ROCK" && computerSelection.toUpperCase() === "SCISSORS"){
+            playerScore++;
+            console.log("You Win! Rock beats Scissors");
+            game();
+        }
+        else{
+            console.log("Player and Computer chose the same thing. So its a tie!");
+            game();
+        }
+    }
+}
+
+
+
+</script>

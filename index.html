@@ -1,3 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Page Title</title>
+    </head>
+    <body>
+        <h1>Choose Rock, Paper, or Scissors<h1>
+            <h3>Game is up to 5</h3>
+            
+        <button  id="rock" >Rock</button>
+        <button  id="paper" >Paper</button>
+        <button  id="scissors" >Scissors</button>
+
+        <div>
+            <h3 id="info"></h3>
+            <h3 id="pScore">Player Score = 0</h3>
+            <h3 id="cScore">Computer Score = 0</h3>
+
+        </div>
+
+    </body>
+</html>
+
+
+
+
+
 <script>
 
 function computerPlay(){
@@ -7,60 +36,61 @@ function computerPlay(){
 
 let playerScore = 0;
 let compScore = 0;
-game();
 
 
-function game(){
+document.getElementById('rock').addEventListener("click", function(){playRound("rock",computerPlay());});
+document.getElementById('paper').addEventListener("click", function(){playRound("paper",computerPlay());});
+document.getElementById('scissors').addEventListener("click", function(){playRound("scissors",computerPlay());});
+
+
     
-    if(playerScore < 5 && compScore < 5){
-        let playerSelection = prompt("Choose Rock, Paper, or Scissor");
-        let computerSelection = computerPlay();
-        playRound(playerSelection, computerSelection);
-    }
-    else if (playerScore === 5){
-        console.log("Player Wins!");
-    }
-    else{
-        console.log("Computer Wins!");
-    }
 
 
-    function playRound (playerSelection, computerSelection){
-        if (playerSelection.toUpperCase() === "ROCK" && computerSelection.toUpperCase() === "PAPER"){
-            compScore++;
-            console.log("You Lose! Rock beats Paper");
-            game();
-        }
-        else if (playerSelection.toUpperCase() === "PAPER" && computerSelection.toUpperCase() === "SCISSORS"){
-            compScore++;
-            console.log("You Lose! Scissors beats Paper");
-            game();
-        }
-        else if (playerSelection.toUpperCase() === "SCISSORS" && computerSelection.toUpperCase() === "ROCK"){
-            compScore++;
-            console.log("You Lose! Rock beats Scissors");
-            game();
-        }
-        else if (playerSelection.toUpperCase() === "PAPER" && computerSelection.toUpperCase() === "ROCK"){
-            playerScore++;
-            console.log("You Win! Paper beats Rock");
-            game();
-        }
-        else if (playerSelection.toUpperCase() === "SCISSORS" && computerSelection.toUpperCase() === "PAPER"){
-            playerScore++;
-            console.log("You Win! Scissors beats Paper");
-            game();
-        }
-        else if (playerSelection.toUpperCase() === "ROCK" && computerSelection.toUpperCase() === "SCISSORS"){
-            playerScore++;
-            console.log("You Win! Rock beats Scissors");
-            game();
-        }
-        else{
-            console.log("Player and Computer chose the same thing. So its a tie!");
-            game();
-        }
+function playRound(playerSelection, computerSelection){
+    if(playerScore === 5 || compScore === 5){
+        document.getElementById("info").innerHTML = "The game is over please refresh the page to play again";
     }
+    else if(playerSelection.toUpperCase() === "ROCK" && computerSelection.toUpperCase() === "PAPER"){
+        compScore++;
+        document.getElementById("cScore").innerHTML = "Computer Score = " + compScore;
+        //console.log("You Lose! Rock beats Paper");
+        document.getElementById("info").innerHTML = "You Lose! Rock beats Paper";
+    }
+    else if (playerSelection.toUpperCase() === "PAPER" && computerSelection.toUpperCase() === "SCISSORS"){
+        compScore++;
+        document.getElementById("cScore").innerHTML = "Computer Score = " + compScore;
+        //console.log("You Lose! Scissors beats Paper");
+        document.getElementById("info").innerHTML = "You Lose! Scissors beats Paper";
+    }
+     else if (playerSelection.toUpperCase() === "SCISSORS" && computerSelection.toUpperCase() === "ROCK"){
+        compScore++;
+        document.getElementById("cScore").innerHTML = "Computer Score = " + compScore;
+        //console.log("You Lose! Rock beats Scissors");
+        document.getElementById("info").innerHTML = "You Lose! Rock beats Scissors";
+    }
+    else if (playerSelection.toUpperCase() === "PAPER" && computerSelection.toUpperCase() === "ROCK"){
+        playerScore++;
+        document.getElementById("pScore").innerHTML = "Player Score = " + playerScore;
+        //console.log("You Win! Paper beats Rock");
+        document.getElementById("info").innerHTML = "You Win! Paper beats Rock";
+    }
+    else if (playerSelection.toUpperCase() === "SCISSORS" && computerSelection.toUpperCase() === "PAPER"){
+        playerScore++;
+        document.getElementById("pScore").innerHTML = "Player Score = " + playerScore;
+        //console.log("You Win! Scissors beats Paper");
+        document.getElementById("info").innerHTML = "You Win! Scissors beats Paper";
+    }
+    else if (playerSelection.toUpperCase() === "ROCK" && computerSelection.toUpperCase() === "SCISSORS"){
+        playerScore++;
+        document.getElementById("pScore").innerHTML = "Player Score = " + playerScore;
+        //console.log("You Win! Rock beats Scissors");
+        document.getElementById("info").innerHTML = "You Win! Rock beats Scissors";
+    }
+    else{ 
+       //console.log("Player and Computer chose the same thing. So its a tie!");
+       document.getElementById("info").innerHTML = "Player and Computer chose the same thing. So its a tie!";
+    }
+    
 }
 
 
